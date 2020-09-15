@@ -15,7 +15,7 @@ const jsLoaders = () => {
         loader: "babel-loader",                
         options: {
             presets: ["@babel/preset-env"],
-           
+            plugins: ["@babel/plugin-proposal-class-properties"]
          }
         }
     ]
@@ -71,16 +71,17 @@ module.exports = {
             {
               test: /\.s[ac]ss$/i,
               use: [
-               {
-                   loader:  MiniCssExtractPlugin.loader, 
-                   options: {
-                       hmr: isDev,
-                       reloadAll: true
-                   }
-               },            
-                'css-loader',                
+                {
+                  loader: MiniCssExtractPlugin.loader,
+                  options: {
+                    hmr: isDev,
+                    reloadAll: true
+                  }
+                },
+                'css-loader',
                 'sass-loader'
               ],
+        
             },
             { 
                 test: /\.js$/, 
