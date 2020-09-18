@@ -3,24 +3,28 @@ const CODE = {
     Z: 90
 }
 
-function createCell() {
+function createCell(_, col) {
     return `
-    <div class="cell" contenteditable=""></div>
+    <div class="cell" i contenteditable="" data-col="${col}"></div>
     `
 }
 
-function createCol(el) {
+function createCol(el, i) {
     return `
-    <div class="column">
+    <div class="column" data-type="resizable" data-col="${i}">
+       
         ${el}
+        <div class="col-resize"  data-resize="col"></div>
     </div>
     `
 }
 
 function createRow(content, i) {
     return `        
-    <div class="row">
-    <div class="row-info">${i + 1 || ''}</div>
+    <div class="row"  data-type="resizable">
+    <div class="row-info">${i + 1 || ''}
+        <div class="row-resize" data-resize="row"></div>
+    </div>
     <div class="row-data">${content}</div>          
     </div>   
     `
