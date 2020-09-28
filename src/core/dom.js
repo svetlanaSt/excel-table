@@ -10,8 +10,18 @@ class Dom {
         this.$el.innerHTML = html;
         return this;
     }
-    return this.$el.outerHTML.trim();
-       
+    return this.$el.outerHTML.trim();       
+   }
+
+   text(text) {
+    if (typeof text === 'string') {
+        this.$el.textContent = text;
+        return this;
+    }
+    if (this.$el.tagName.toLowerCase() === 'input') {
+        return this.$el.value.trim();   
+    }
+    return this.$el.textContent.trim();       
    }
 
    clear() {
@@ -20,11 +30,13 @@ class Dom {
    }
 
    on(eventType, fn) {
-    this.$el.addEventListener(eventType, fn);    
+    this.$el.addEventListener(eventType, fn);
+    return this;    
    }
 
    off(eventType, fn) {
-    this.$el.removeEventListener(eventType, fn);    
+    this.$el.removeEventListener(eventType, fn);
+    return this;    
    }
 
    append(node) {
@@ -47,8 +59,36 @@ class Dom {
        return this.$el.dataset;
    }
 
+   find(selector) {
+    return $(this.$el.querySelector(selector));
+   }
+
    findAll(selector) {
        return this.$el.querySelectorAll(selector);
+   }
+
+   addClass(classes) {
+    return this.$el.classList.add(classes);
+   }
+
+   focus() {
+       this.$el.focus();
+       return this;
+   }
+
+   removeClass(classes) {
+    return this.$el.classList.remove(classes);
+   }
+
+   id(parse) {
+       if (parse) {
+        const parsed = this.id().split(':');        
+        return {
+            row: +parsed[0],
+            col: +parsed[1]
+        }
+       }
+       return this.data.id;
    }
 
    css(styles = {}) {
