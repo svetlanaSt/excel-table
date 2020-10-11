@@ -1,5 +1,6 @@
 import { ExcelComponents } from "../../core/ExcelComponents";
 import {$} from '@core/dom';
+import * as actions from "../../redux/actions";
 
 export class Formula extends ExcelComponents {
     static className = 'excel__formula';
@@ -8,11 +9,13 @@ export class Formula extends ExcelComponents {
         super($root, {
             name: 'Formula',
             listeners: ['input', 'keydown'],
+            subscribe: ['currentText'],
             ...options
         });       
     }    
     
     toHTML() {
+        console.log(this.store.getState().currentText);
         return `
         <div class="info">fx</div>
         <div id="formula" class="input" contenteditable spellcheck="false"></div>`;  
@@ -21,17 +24,26 @@ export class Formula extends ExcelComponents {
     init() {
         super.init();
         this.formula = this.$root.find('#formula');
-        this.$on('table:select', $cell => {           
-           this.formula.text($cell.text());
-        });
 
-        this.$on('table:input', $cell => {           
-            this.formula.text($cell.text());
-         });
+        this.$on('table:select', $cell => {                     
+           this.formula.text($cell.text());
+        });       
+
+        // this.$on('table:input', $cell => {           
+        //     this.formula.text($cell.text());
+        //  });
+
+        // this.$subscribe(state => {
+        //     this.formula.text(state.currentText);
+        //  });
     }
 
+    storeChanged({currentText}) {
+        this.formula.text(currentText);
+    }  
+
     onInput(event) {        
-        this.$emit('formula:input', $(event.target).text());        
+        this.$emit('formula:input', $(event.target).text());               
     }
 
     onKeydown(event) {
@@ -40,12 +52,6 @@ export class Formula extends ExcelComponents {
             this.$emit('formula:focus');
         }        
     }
-
-    // onClick() {
-    //     console.log('Ye', this.$root);
-    // }
-
-
 
 
     
