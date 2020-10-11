@@ -20,10 +20,20 @@ export class TableSelection  {
       this.group.forEach($cell => $cell.addClass('selected'));     
     }
 
+    get selectedIds() {
+      return this.group.map($el => $el.id());
+    }
+
     clear() {
       this.group.forEach(el => {
          el. removeClass('selected')
       });
       this.group.length = 0;
+    }
+
+    applyStyle(style) {
+      this.group.forEach(el => {
+         el.css(style)
+      });
     }
 }
