@@ -51,7 +51,7 @@ export class Table extends ExcelComponents {
           value: style,
           ids: this.selection.selectedIds
         }));        
-      });     
+      });   
       
     }
 
