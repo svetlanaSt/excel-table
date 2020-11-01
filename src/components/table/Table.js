@@ -59,8 +59,7 @@ export class Table extends ExcelComponents {
       this.selection.select($cell);
       this.$emit('table:select', $cell);
       const styles = $cell.getStyles(Object.keys(defaultStyles));
-      this.$dispatch(actions.changeStyles(styles));
-      console.log(styles);
+      this.$dispatch(actions.changeStyles(styles));      
     }
     
     onKeydown(event) {
@@ -111,9 +110,8 @@ export class Table extends ExcelComponents {
       }));
     }
     
-    onInput(event) {
-      // this.$emit('table:input', $(event.target));
-      this.updateTextinStore($(event.target).text())
+    onInput(event) {      
+      this.updateTextinStore($(event.target).text());
     }
  }
 

@@ -1,6 +1,5 @@
 import { ExcelComponents } from "../../core/ExcelComponents";
 import {$} from '@core/dom';
-import * as actions from "../../redux/actions";
 
 export class Formula extends ExcelComponents {
     static className = 'excel__formula';
@@ -14,8 +13,7 @@ export class Formula extends ExcelComponents {
         });       
     }    
     
-    toHTML() {
-        console.log(this.store.getState().currentText);
+    toHTML() {       
         return `
         <div class="info">fx</div>
         <div id="formula" class="input" contenteditable spellcheck="false"></div>`;  
@@ -27,15 +25,8 @@ export class Formula extends ExcelComponents {
 
         this.$on('table:select', $cell => {                     
            this.formula.text($cell.text());
-        });       
-
-        // this.$on('table:input', $cell => {           
-        //     this.formula.text($cell.text());
-        //  });
-
-        // this.$subscribe(state => {
-        //     this.formula.text(state.currentText);
-        //  });
+        });    
+ 
     }
 
     storeChanged({currentText}) {
@@ -52,7 +43,5 @@ export class Formula extends ExcelComponents {
             this.$emit('formula:focus');
         }        
     }
-
-
     
 }
