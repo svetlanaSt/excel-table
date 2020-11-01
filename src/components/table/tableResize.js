@@ -9,14 +9,11 @@ export function resizeHandler($root, event) {
           const sideProp = type === 'col' ? 'bottom' : 'right';
           let value;
 
-          console.log($parent.data.row);
-          
-
           $resizer.css({
             opacity: 1,
             zIndex: 1000,
             [sideProp]: '-5000px'
-          })       
+          });       
 
           document.onmousemove = e => {
             if (type === 'col') {

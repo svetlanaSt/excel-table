@@ -48,7 +48,7 @@ export function debounce(fn, ms) {
         };
         clearTimeout(timeout);
         timeout = setTimeout(later, ms);
-    }
+    };
 }
 
 export function clone(obj) {

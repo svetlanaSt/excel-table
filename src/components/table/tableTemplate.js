@@ -32,7 +32,7 @@ function createCell(state, row) {
          data-id="${id}"
          data-value="${data || ''}"
          style="${styles};  width: ${getWidth(state.colState, col)}">${parse(data) || ''}</div>
-        `
+        `;
   }
 }
 
@@ -42,7 +42,7 @@ function createCol({col, index, width}) {
       ${col}
       <div class="col-resize" data-resize="col"></div>
   </div>
-  ` 
+  ` ;
 }
 
 function createRow(index, content, state) {
@@ -55,7 +55,7 @@ function createRow(index, content, state) {
         </div>
         <div class="row-data" >${content}</div>
       </div>
-    `
+    `;
   }
 
 function toChar(_, index) {
@@ -66,7 +66,7 @@ function withWidthFromState(state) {
   return function (col, index) {
     return {
       col, index, width: getWidth(state.colState, index)
-    }    
+    };   
   }  
 }
 
